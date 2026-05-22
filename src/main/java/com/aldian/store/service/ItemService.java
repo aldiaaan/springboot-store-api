@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,5 +48,13 @@ public class ItemService {
 
         Item savedItem = itemRepository.save(item);
         return mapToItemResponse(savedItem);
+    }
+
+    @Transactional
+    public void deleteItem(UUID itemId) {
+        if (!itemRepository.existsById(itemId)) {
+            throw new IllegalArgumentException("Item not found with ID: " + itemId);
+        }
+        itemRepository.deleteById(itemId);
     }
 }

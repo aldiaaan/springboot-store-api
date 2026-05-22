@@ -9,12 +9,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,5 +31,16 @@ public class ItemsController {
     @Operation(summary = "Create new item")
     public ResponseEntity<ItemResponse> createItem(@Valid @RequestBody CreateItemRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(itemService.createItem(request));
+    }
+
+    @DeleteMapping("/items/{id}")
+    @Operation(summary = "Delete an item by given id (UUID)")
+    public ResponseEntity<Void> deleteItem(@PathVariable UUID id) {
+        try {
+            itemService.deleteItem(id);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
