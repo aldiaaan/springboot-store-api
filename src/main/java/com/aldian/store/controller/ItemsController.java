@@ -18,11 +18,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Items")
 public class ItemsController {
 
     private final ItemService itemService;
 
     @GetMapping("/items")
+    @Operation(summary = "List all items")
     public ResponseEntity<List<ItemResponse>> getAllItems() {
         return ResponseEntity.ok(itemService.getAllItems());
     }
