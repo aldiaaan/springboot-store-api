@@ -2,9 +2,11 @@ package com.aldian.store.service;
 
 import com.aldian.store.domain.Item;
 import com.aldian.store.domain.Variant;
+import com.aldian.store.dto.CreateItemRequest;
 import com.aldian.store.dto.ItemResponse;
 import com.aldian.store.dto.VariantResponse;
 import com.aldian.store.repository.ItemRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +37,15 @@ public class ItemService {
                 variant.getPrice(), variant.getStockOnHand(), variant.getStockAllocated(),
                 variant.getAvailableStock()
         );
+    }
+
+    @Transactional
+    public ItemResponse createItem(CreateItemRequest request) {
+        Item item = new Item();
+        item.setName(request.name());
+        item.setDescription(request.description());
+
+        Item savedItem = itemRepository.save(item);
+        return mapToItemResponse(savedItem);
     }
 }
