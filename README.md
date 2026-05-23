@@ -49,6 +49,8 @@ Available environment variables:
   - Added this for standardizing error and api response, ensuring the consumer receives consisten data shape. Also added `ServerException` and `ClientException` to differentiate between errors that are safe to send to client or not. `ServerException` message by default will be masked with "Something went wrong" kind of message 
 - Stock Management
   - Added `stock_on_hand` (items currenly in our warehouse) and `stock_allocated` (items that are ordered but still in out warehouse / not shipped yet) to address overselling problem. Available stocks are calculated by `stock_on_hand` - `stock_on_allocated`
+- OpenAPI
+  - Allow contract first development to unblock the frontend team to be able to test our api before implementation done. Also it enable frontend to use API client generation tools that accepts openapi schema to easier the development. With that it reduces bugs caused by "misinterpreting" data types from backend. 
 
 ## API Endpoint Examples
 
