@@ -29,7 +29,7 @@ public class ItemsController {
         return ResponseEntity.ok(itemService.getAllItems());
     }
 
-    @PostMapping
+    @PostMapping("/items")
     @Operation(summary = "Create new item")
     public ResponseEntity<ItemResponse> createItem(@Valid @RequestBody CreateItemRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(itemService.createItem(request));
