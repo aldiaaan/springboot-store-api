@@ -6,7 +6,7 @@
 ### Make sure you have all these things installed
 
 1. `Docker` (https://docs.docker.com/get-started/)
-2. `Makefile` (Optional)
+2. `make` (Optional)
 
 ### Running the app
 
@@ -14,7 +14,7 @@ You could run this project via docker command
 
 `docker compose up -d`
 
-Or, if you have `Makefile` installed you could run
+Or, if you have `make` installed you could run
 
 **Available `make` commands:**
 *   `make up` : Starts the app and database.
@@ -35,7 +35,7 @@ This project also provides `Scalar` web interface that you could access at http:
 - Atomic Transaction for Stock Handling
   - for stock operation, i did use atomic sql queries to prevent invalid db state
 - Global Exception Handling
-  - Added this for standardizing error and api response, ensuring the consumer receives consisten data shape. Also added `ServerException` and `ClientException` to differentiate between errors that are safe to safe to client or not. `ServerException` message by default will be masked with "Something went wrong" kind of message 
+  - Added this for standardizing error and api response, ensuring the consumer receives consisten data shape. Also added `ServerException` and `ClientException` to differentiate between errors that are safe to send to client or not. `ServerException` message by default will be masked with "Something went wrong" kind of message 
 
 ## API Endpoint Examples
 
