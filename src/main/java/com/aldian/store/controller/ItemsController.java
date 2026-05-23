@@ -38,12 +38,8 @@ public class ItemsController {
     @DeleteMapping("/items/{id}")
     @Operation(summary = "Delete an item by given id (UUID)")
     public ResponseEntity<Void> deleteItem(@PathVariable UUID id) {
-        try {
-            itemService.deleteItem(id);
-            return ResponseEntity.noContent().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
+        itemService.deleteItem(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/items/{itemId}/variants")

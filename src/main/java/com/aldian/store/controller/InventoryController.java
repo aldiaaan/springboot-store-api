@@ -32,12 +32,8 @@ public class InventoryController {
     public ResponseEntity<Void> reserve(
             @PathVariable UUID id,
             @Valid @RequestBody StockTransactionRequest request) {
-        try {
-            inventoryService.reserveStock(id, request.quantity());
-            return ResponseEntity.ok().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        inventoryService.reserveStock(id, request.quantity());
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/variants/{id}/stock/remove")
@@ -45,11 +41,7 @@ public class InventoryController {
     public ResponseEntity<Void> remove(
             @PathVariable UUID id,
             @Valid @RequestBody StockTransactionRequest request) {
-        try {
-            inventoryService.removeStock(id, request.quantity());
-            return ResponseEntity.ok().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        inventoryService.removeStock(id, request.quantity());
+        return ResponseEntity.ok().build();
     }
 }
