@@ -24,7 +24,17 @@ Or, if you have `make` installed you could run
 
 After you have running one of those commands, the app will be avaailable on http://localhost:8080
 
-This project also provides `Scalar` web interface that you could access at http://localhost:8080/docs
+This project also provides [`Scalar`](https://scalar.com/) web interface that you could access at http://localhost:8080/docs
+
+
+## Environment Variables
+
+Available environment variables:
+
+* `DB_URL`: JDBC connection URL. Default: `jdbc:postgresql://localhost:5432/store`
+* `DB_USERNAME`: Database username. Default: `admin`
+* `DB_PASSWORD`: Database password. Default: `admin123`
+* `DB_DDL_AUTO`: Hibernate DDL mode. Default: `validate`
 
 ## Assumptions Made
 - Single tenant
