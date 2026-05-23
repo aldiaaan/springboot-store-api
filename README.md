@@ -44,7 +44,7 @@ Available environment variables:
 
 ## Design Decisions
 - Atomic Transaction for Stock Handling
-  - for stock operation, i did use atomic sql queries to prevent invalid db state
+  - For stock operation, I did use atomic sql queries to prevent invalid db state
 - Global Exception Handling
   - Added this for standardizing error and api response, ensuring the consumer receives consisten data shape. Also added `ServerException` and `ClientException` to differentiate between errors that are safe to send to client or not. `ServerException` message by default will be masked with "Something went wrong" kind of message 
 - Stock Management
