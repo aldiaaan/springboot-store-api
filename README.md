@@ -48,7 +48,7 @@ Available environment variables:
 - Global Exception Handling
   - Added this for standardizing error and api response, ensuring the consumer receives consisten data shape. Also added `ServerException` and `ClientException` to differentiate between errors that are safe to send to client or not. `ServerException` message by default will be masked with "Something went wrong" kind of message 
 - Stock Management
-  - Added `stock_on_hand` (items currenly in our warehouse) and `stock_allocated` (items that are ordered but still in out warehouse / not shipped yet) to address overselling problem. We calculate available stoch by `stock_on_hand` - `stock_on_allocated`
+  - Added `stock_on_hand` (items currenly in our warehouse) and `stock_allocated` (items that are ordered but still in out warehouse / not shipped yet) to address overselling problem. We calculate available stock by `stock_on_hand` - `stock_on_allocated`
 
 ## API Endpoint Examples
 
