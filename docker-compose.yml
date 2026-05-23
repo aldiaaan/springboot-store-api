@@ -11,9 +11,10 @@ services:
       - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d store"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      interval: 7s
+      timeout: 10s
+      retries: 10
+      start_period: 15s
     volumes:
       - .tmp/postgres-production:/var/lib/postgresql/data
   app:
