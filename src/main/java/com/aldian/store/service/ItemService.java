@@ -3,9 +3,11 @@ package com.aldian.store.service;
 import com.aldian.store.domain.Item;
 import com.aldian.store.domain.Variant;
 import com.aldian.store.dto.CreateItemRequest;
+import com.aldian.store.dto.CreateVariantRequest;
 import com.aldian.store.dto.ItemResponse;
 import com.aldian.store.dto.VariantResponse;
 import com.aldian.store.repository.ItemRepository;
+import com.aldian.store.repository.VariantRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
+    private final VariantRepository variantRepository;
 
     public List<ItemResponse> getAllItems() {
         return itemRepository.findAll().stream()
@@ -56,5 +59,22 @@ public class ItemService {
             throw new IllegalArgumentException("Item not found with ID: " + itemId);
         }
         itemRepository.deleteById(itemId);
+    }
+
+    @Transactional
+    public VariantResponse addVariant(UUID itemId, CreateVariantRequest request) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalArgumentException("Item not found with ID: " + itemId));
+
+        Variant variant = new Variant();
+        variant.setSku(request.sku());
+        variant.setName(request.name());
+        variant.setPrice(request.price());
+        variant.setStockOnHand(request.initialStock());
+        variant.setStockAllocated(0);
+        variant.setItem(item);
+
+        Variant savedVariant = variantRepository.save(variant);
+        return mapToVariantResponse(savedVariant);
     }
 }

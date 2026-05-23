@@ -1,7 +1,9 @@
 package com.aldian.store.controller;
 
 import com.aldian.store.dto.CreateItemRequest;
+import com.aldian.store.dto.CreateVariantRequest;
 import com.aldian.store.dto.ItemResponse;
+import com.aldian.store.dto.VariantResponse;
 import com.aldian.store.service.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,5 +44,13 @@ public class ItemsController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/items/{itemId}/variants")
+    @Operation(summary = "Add a variant to an item")
+    public ResponseEntity<VariantResponse> addVariant(
+            @PathVariable UUID itemId,
+            @Valid @RequestBody CreateVariantRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemService.addVariant(itemId, request));
     }
 }
