@@ -6,6 +6,7 @@ import com.aldian.store.dto.CreateItemRequest;
 import com.aldian.store.dto.CreateVariantRequest;
 import com.aldian.store.dto.ItemResponse;
 import com.aldian.store.dto.VariantResponse;
+import com.aldian.store.exception.ItemNotFoundException;
 import com.aldian.store.repository.ItemRepository;
 import com.aldian.store.repository.VariantRepository;
 import jakarta.transaction.Transactional;
@@ -56,7 +57,7 @@ public class ItemService {
     @Transactional
     public void deleteItem(UUID itemId) {
         if (!itemRepository.existsById(itemId)) {
-            throw new IllegalArgumentException("Item not found with ID: " + itemId);
+            throw new ItemNotFoundException(itemId);
         }
         itemRepository.deleteById(itemId);
     }
@@ -64,7 +65,7 @@ public class ItemService {
     @Transactional
     public VariantResponse addVariant(UUID itemId, CreateVariantRequest request) {
         Item item = itemRepository.findById(itemId)
-                .orElseThrow(() -> new IllegalArgumentException("Item not found with ID: " + itemId));
+                .orElseThrow(() -> new ItemNotFoundException(itemId));
 
         Variant variant = new Variant();
         variant.setSku(request.sku());
