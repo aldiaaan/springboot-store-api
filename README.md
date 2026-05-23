@@ -26,6 +26,7 @@ After you have running one of those commands, the app will be avaailable on http
 
 This project also provides [`Scalar`](https://scalar.com/) web interface that you could access at http://localhost:8080/docs
 
+We have initial data seeded, so you dont need to add it manually on the first time
 
 ## Environment Variables
 
